@@ -7,6 +7,7 @@ public abstract class GreenFood {
     public GreenFood(double price, double mass) {
         this.price = price;
         this.mass = mass;
+        //git
     }
 
 //    @Override
