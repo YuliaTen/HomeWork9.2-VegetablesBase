@@ -7,12 +7,15 @@ public abstract class GreenFood {
     public GreenFood(double price, double mass) {
         this.price = price;
         this.mass = mass;
-        //git
+
     }
 
-//    @Override
-//    public String toString() {
-//        return    "price=" + price + ", mass=" + mass;
-//    }
+
+
+        @Override
+        public String toString() {
+        String name = getClass().getName();
+          return  name+" Цена: " + price +", Масса: " + mass;
+        }
 }
 
