@@ -26,7 +26,7 @@ public class GreenFoodBase {
             Store randomStore = StoreDatabase.allStores.get(random.nextInt(StoreDatabase.allStores.size()));
             randomStore.localStorage.add(box);
             GreenFood foodBox = box.food;
-            LOG.trace("Коробка: " + box.toString()+" отправлена в магазин " + randomStore);
+            LOG.debug("Коробка: " + box.toString()+" отправлена в магазин " + randomStore);
 
         }
     }
@@ -39,7 +39,7 @@ public class GreenFoodBase {
             Random random = new Random();
             Store randomStore = StoreDatabase.allStores.get(random.nextInt(StoreDatabase.allStores.size()));
             Box box = new Box(randomStore.id, randomStore.brand, food);
-            LOG.trace("Сгенерирована коробка: " + box.toString());
+            LOG.debug("Сгенерирована коробка: " + box.toString());
            // System.out.println("Сгенерирована коробка: " + box.toString());
             boxes.add(box);
         }
@@ -52,7 +52,7 @@ public class GreenFoodBase {
         Random random = new Random();
         int greenFoodsCount = random.nextInt(40) + 30;
         LOG.info(String.format("Будет сгенерировано %d партий растительных продуктов.", greenFoodsCount));
-        System.out.println(String.format("Будет сгенерировано %d партий растительных продуктов.", greenFoodsCount));
+        //System.out.println(String.format("Будет сгенерировано %d партий растительных продуктов.", greenFoodsCount));
 
         for(int i=0; i<greenFoodsCount; i++) {
             int greenFoodChoice = random.nextInt(4);
@@ -75,8 +75,8 @@ public class GreenFoodBase {
                     greenFood = new Potato(price, mass);
                     break;
             }
-            LOG.trace("Сгенерирована еда:"+greenFood.toString());
-            System.out.println("Сгенерирована еда:"+greenFood.toString());
+            LOG.debug("Сгенерирована еда:"+greenFood.toString());
+            //System.out.println("Сгенерирована еда:"+greenFood.toString());
             generatedFood.add(greenFood);
         }
 
@@ -88,12 +88,12 @@ public class GreenFoodBase {
                 .filter(s->s.food.getClass().equals(Banana.class)||s.food.getClass().equals(Apple.class))
                 .filter(s->s.food.price<50)
                 .mapToInt(s -> (int) (s.food.price * s.food.mass)).sum();
-        System.out.println("Сумма фруктов:" + countFruitMoney);
+        LOG.debug("Сумма фруктов:" + countFruitMoney);
     }
 
     public void countAllFoodMoney(List<Box<GreenFood>> baseStorage){
         int countAllFoodMoney = baseStorage.stream().mapToInt(s -> (int) (s.food.price * s.food.mass)).sum();
-        System.out.println("Сумма: "+ countAllFoodMoney);
+        LOG.debug("Сумма: "+ countAllFoodMoney);
     }
 
     public   void setHashMap(){
@@ -102,7 +102,7 @@ public class GreenFoodBase {
             for (Box foodBox : store.localStorage){
                 GreenFood food = (GreenFood)foodBox.getFood();
                 String className = food.getClass().getName();
-                System.out.println("еда "+className+" магазин: "+store.id);
+                LOG.debug("еда "+className+" в магазине: "+store.id);
                 if (i==0) {store.storageStatistics.put(className, food.mass);i++;continue;}
                 int k = 0;
                 for (Map.Entry<String, Double> entry : store.storageStatistics.entrySet()) {
